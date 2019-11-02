@@ -21,7 +21,24 @@ def handle_uploaded_file(f):
 	pass
 
 
-def populate()
+def populate():
+	train_fire = os.listdir('../data/training/fire')
+	train_not_fire = os.listdir('../data/training/not_fire')
+	valid_fire = os.listdir('../data/validation/fire')
+	valid_not_fire = os.listdir('../data/validation/not_fire')
+
+	for image in train_fire:
+		img = Image(url = image, is_fire = 1, is_training = 1)
+		img.save()
+	for image in train_not_fire:		
+		img = Image(url = image, is_fire = 0, is_training = 1)
+		img.save()
+	for image in valid_fire:
+		img = Image(url = image, is_fire = 1, is_training = 0)
+		img.save()
+	for image in valid_not_fire:		
+		img = Image(url = image, is_fire = 0, is_training = 0)
+		img.save()
 # class call_model(APIView):
 # 	def get(self,request):
 # 	    if request.method == 'GET':
