@@ -6,7 +6,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from ..scripts import preprocessing
+import sys
+sys.path.append('../')
+from scripts.preprocessing import preprocessing
 
 def main():
 	# creates data.txt file with training/validation data
