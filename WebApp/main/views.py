@@ -15,7 +15,7 @@ from .apps import WebappConfig
 
 # Create your views here.
 def index(request):
-	return HttpResponse('You are at the index!')
+	return HttpResponse('Is this on fire?')
 
 
 def popu
@@ -40,4 +40,4 @@ def upload(request):
 			return HttpResponseRedirect('/success/url/')
 	else:
 		form = UploadImageForm()
-	return render(request, 'upload.html', {'form': form})
+	return render(request, 'main.html', {'form': form})
