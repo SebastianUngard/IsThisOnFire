@@ -23,3 +23,7 @@ to commit locally
 `git push origin master`
 
 to push changes to the master branch on github.
+
+To pull changes from github
+
+`git pull origin master`
