@@ -1,6 +1,5 @@
 import os
 
-
 def preprocessing():
 	train_fire = os.listdir('../data/training/fire')
 	train_not_fire = os.listdir('../data/training/not_fire')
