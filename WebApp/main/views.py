@@ -17,8 +17,11 @@ from .apps import WebappConfig
 def index(request):
 	return HttpResponse('Is this on fire?')
 
+def handle_uploaded_file(f):
+	pass
 
-def popu
+
+def populate()
 # class call_model(APIView):
 # 	def get(self,request):
 # 	    if request.method == 'GET':
