@@ -1,5 +1,9 @@
 # Is this on fire?
 
+This image recognition tool will detect if an object is on fire or not.
+
+## Contributing
+
 Steps for pushing local changes to github:
 
 To clone repository to your local drive:
