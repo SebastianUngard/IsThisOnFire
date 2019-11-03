@@ -23,6 +23,7 @@ def index(request):
 def handle_uploaded_file(f):
 	# process ML model and receive output
 	global ANSWER
+	
 	ANSWER = 1
 
 
