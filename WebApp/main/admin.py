@@ -3,6 +3,6 @@ from .models import Image
 
 # Register your models here.
 class ImageAdmin(admin.ModelAdmin):
-	list_display = ('is_fire', 'url')
+	list_display = ('is_fire', 'is_training', 'url')
 
 admin.site.register(Image, ImageAdmin)
