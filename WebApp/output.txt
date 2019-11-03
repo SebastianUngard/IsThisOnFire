@@ -1,0 +1,2 @@
+The file "<_io.TextIOWrapper name='output.txt' mode='w' encoding='UTF-8'>" outputs:
+This is a fire. RUN!

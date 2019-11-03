@@ -3,9 +3,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Image
 from .forms import UploadImageForm, ImageUpload 
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import cv2
+import tensorflow as tf
 
 ANSWER = -1
 FORM = None
+CATEGORIES = ["Fire", "No_Fire"]
+
+
+def prepare(filepath):
+    IMG_SIZE = 70  # 50 in txt-based
+    img_array = cv2.imread(filepath)
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
+    return new_array.reshape(-1, IMG_SIZE, IMG_SIZE, 3)
 
 # Create your views here.
 def index(request):
@@ -23,8 +34,22 @@ def index(request):
 def handle_uploaded_file(f):
 	# process ML model and receive output
 	global ANSWER
-	
-	ANSWER = 1
+	model = tf.keras.models.load_model("./main/CNN.model")
+
+	img = './media/images/' + str(f)
+
+	f = open("output.txt", "w")
+	f.write("The file \"" + str(f) + "\" outputs:\n")
+
+	prediction = model.predict([prepare(img)])
+	print(prediction)  # will be a list in a list.
+	if(CATEGORIES[int(prediction[0][0])] == 'Fire'):
+		f.write("This is a fire. RUN!")
+		ANSWER = 1
+	else:
+		f.write("No fire, ya good!")
+		ANSWER = 0
+	f.close()
 
 
 # ALL IMAGES HAVE BEEN LOADED DO NOT UNCOMMENT
