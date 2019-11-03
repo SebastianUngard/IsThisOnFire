@@ -1,19 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Image
-from .forms import UploadImageForm 
+from .forms import UploadImageForm, ImageUpload 
 import os
 
-ANSWER = False
+ANSWER = -1
 FORM = None
 
 # Create your views here.
 def index(request):
-	return render(request, 'main.html')
+	global ANSWER
+	ANSWER = -1
+	path = './media/images/'
+	for file in os.listdir(path):
+		os.remove(path + file)
+	qset = ImageUpload.objects.all()
+	if len(qset) > 0:
+		for obj in qset:
+			obj.delete()
+	return render(request, 'main.html', {'answer': ANSWER})
 
 def handle_uploaded_file(f):
 	# process ML model and receive output
-	ANSWER = True
+	global ANSWER
+	ANSWER = 1
 
 
 # ALL IMAGES HAVE BEEN LOADED DO NOT UNCOMMENT
@@ -54,15 +64,14 @@ def handle_uploaded_file(f):
 # 	        return JsonResponse(response)
 
 def upload(request):
+	global ANSWER
 	if request.method == 'POST':
-		FORM = UploadImageForm(request.POST, request.FILES)
-		if FORM.is_valid():
+		form = UploadImageForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
 			handle_uploaded_file(request.FILES['img'])
-			return HttpResponseRedirect('/success/')
+			return render(request, 'main.html', {'answer': ANSWER, 'image': ImageUpload.objects.all()[0] })
 	else:
-		FORM = UploadImageForm()
-	return render(request, 'main.html', {'form': FORM})
-
-def output(request):
-	return render(request, 'main.html', {'answer': ANSWER,
-										 'form': FORM})
+		form = UploadImageForm()
+		ANSWER = -1
+	return render(request, 'main.html', {'answer': ANSWER, 'form': form })

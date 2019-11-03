@@ -1,0 +1,46 @@
+body {
+	width: auto;
+	height: auto;
+	background-color: #e0914c;
+	overflow: auto;
+	text-align:;
+}
+
+p {
+	text-align: center;
+	font-size: 18pt;
+	background-color: transparent;
+}
+
+h1 {
+	text-align: center;
+	font-size: 32pt;
+	background-color: transparent;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+form {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+input {
+	text-align: center;
+}
+
+button {
+	text-align: center;
+}
+
+div {
+	display: block;
+	text-align: center;
+}

@@ -1,12 +1,26 @@
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
 {% block content %}
-  <form method="POST" action="/upload/" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="img">
-    <button type="submit">Upload</button>
-  </form>
-
-  
-
+	<body>
+		{% if answer == -1 %}
+			<div>
+				<h1>Is This On Fire?</h1>
+				<p>Upload an image of an object and our <b>Machine Learning AI</b> will tell you whether it is on fire or not</p>
+				<form method="POST" action="/upload/" enctype="multipart/form-data">
+			    	{% csrf_token %}
+			    	<input class="button" type="file" name="img">
+			    	<button class="button" type="submit">Upload</button>
+			  	</form>
+		  	</div>
+	  	{% endif %}
+	  	{% if answer == 1 %}
+	  		<p>This object IS on fire</p>
+	  		<img src="{{ image.img.url }}" alt="img">
+	  	{% elif answer == 0 %}
+	  		<p>This object IS NOT on fire</p>
+	  		<img src="{{ image.img.url }}" alt="img">
+	  	{% endif %}
+	</body>
 {% endblock %}
