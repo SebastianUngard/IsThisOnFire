@@ -13,7 +13,14 @@ def prepare(filepath):
 
 model = tf.keras.models.load_model("CNN.model")
 
-prediction = model.predict([prepare('image.jpg')])
-print(prediction)  # will be a list in a list.
-print(CATEGORIES[int(prediction[0][0])])
+img = 'ocean.jpg'
 
+f = open("output.txt", "w")
+f.write("The file \"" + img + "\" outputs:\n")
+
+prediction = model.predict([prepare(img)])
+# print(prediction)  # will be a list in a list.
+if(CATEGORIES[int(prediction[0][0])] == 0):
+	f.write("This is a fire. RUN!")
+else:
+	f.write("No fire, ya good!")

@@ -1,0 +1,2 @@
+The file "ocean.jpg" outputs:
+No fire, ya good!
