@@ -6,6 +6,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import cv2
 import tensorflow as tf
+import numpy as np
 
 ANSWER = -1
 FORM = None
